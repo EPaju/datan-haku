@@ -1,6 +1,6 @@
 # Ilmanlaatudatan haku
 
-Tämä on tehtävän ensimmäinen sovellus. Ohjelma hakee OpenAQ:sta ilmanlaatudataa ja tallentaa sen SQLite-tietokantaan.
+Ohjelma hakee OpenAQ:sta ilmanlaatudataa ja tallentaa sen SQLite-tietokantaan.
 
 Valitsin SQLite-tietokannan, koska sitä on helppo käyttää paikallisesti eikä erillistä tietokantapalvelinta tarvitse asentaa.
 
