@@ -8,6 +8,10 @@ Valitsin SQLite-tietokannan, koska sitä on helppo käyttää paikallisesti eik�
 
 Tietokannan fyysinen malli on tiedostossa `schema.sql`.
 
+Kaavio mallista:
+
+![ER-kaavio](er-kaavio.png)
+
 Taulut ovat:
 
 - `countries` = maat
