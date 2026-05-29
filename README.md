@@ -58,3 +58,7 @@ https://api.openaq.org/v3/sensors/{sensor_id}/measurements
 ```
 
 Testasin datan hakua ajamalla importterin omalla OpenAQ API-avaimella. Ohjelma haki 712 mittausta ja tallensi ne SQLite-tietokantaan.
+
+## Testaus
+
+Testasin, että ohjelma hakee OpenAQ-datan ja tallentaa mittaukset tietokantaan.
