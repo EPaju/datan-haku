@@ -1,20 +1,22 @@
-# OpenAQ data importer
+# Ilmanlaatudatan haku
 
-Tämä repositorio sisältää pienen Python-sovelluksen, joka hakee OpenAQ API v3 -rajapinnasta ilmanlaatumittauksia ja tallentaa ne relaatiotietokantaan.
+Tämä on tehtävän ensimmäinen sovellus. Ohjelma hakee OpenAQ:sta ilmanlaatudataa ja tallentaa sen SQLite-tietokantaan.
 
-Tietokantana käytetään SQLiteä. Sama relaatiomalli toimii myös MySQLissä pienin tyyppimuutoksin.
+Valitsin SQLite-tietokannan, koska sitä on helppo käyttää paikallisesti eikä erillistä tietokantapalvelinta tarvitse asentaa.
 
-## Tietokantamalli
+## Tietokannan rakenne
 
-Fyysinen malli on tiedostossa [schema.sql](schema.sql). Malli huomioi tehtävän vaatimukset:
+Tietokannan fyysinen malli on tiedostossa `schema.sql`.
 
-- maa tallennetaan tauluun `countries`
-- kaupunki tallennetaan tauluun `cities`
-- mittauspaikka tallennetaan tauluun `locations`
-- sensorit tallennetaan tauluun `sensors`
-- mittausarvot tallennetaan tauluun `measurements`
+Taulut ovat:
 
-Yhdellä mittauspaikalla voi olla monta sensoria. Tämä ratkaisee tilanteen, jossa yksi CSV- tai API-lähde sisältää useita eri sensoreita.
+- `countries` = maat
+- `cities` = kaupungit
+- `locations` = mittauspaikat
+- `sensors` = sensorit
+- `measurements` = mittaukset
+
+Yhdellä mittauspaikalla voi olla monta sensoria. Tämän takia sensorit ovat omassa taulussaan.
 
 ## Asennus
 
@@ -33,23 +35,20 @@ Lisää `.env`-tiedostoon OpenAQ API -avain.
 python src\import_openaq.py
 ```
 
-Oletuksena sovellus hakee mittauksia yhden kuukauden ajalta yhdeltä sensorilta. Muuta asetukset `.env`-tiedostossa:
+Oletuksena ohjelma hakee dataa yhden kuukauden ajalta yhdeltä sensorilta. Asetuksia voi vaihtaa `.env`-tiedostosta.
 
-- `OPENAQ_API_KEY`
-- `OPENAQ_SENSOR_ID`
-- `OPENAQ_LOCATION_ID`
-- `OPENAQ_COUNTRY_CODE`
-- `OPENAQ_COUNTRY_NAME`
-- `OPENAQ_CITY_NAME`
-- `OPENAQ_LOCATION_NAME`
-- `DATE_FROM`
-- `DATE_TO`
-- `DATABASE_PATH`
+Tärkeimmät asetukset ovat:
 
-Tietokanta luodaan automaattisesti, jos sitä ei vielä ole.
+- `OPENAQ_API_KEY` = oma OpenAQ API-avain
+- `OPENAQ_SENSOR_ID` = haettavan sensorin id
+- `OPENAQ_LOCATION_ID` = mittauspaikan id
+- `DATE_FROM` ja `DATE_TO` = aikaväli
+- `DATABASE_PATH` = tietokantatiedoston sijainti
 
-## Lähde
+Jos tietokantaa ei vielä ole, ohjelma luo sen automaattisesti.
 
-OpenAQ API v3 käyttää sensorikohtaisia mittausresursseja:
+## Käyttämäni OpenAQ endpoint
 
-`https://api.openaq.org/v3/sensors/{sensor_id}/measurements`
+```text
+https://api.openaq.org/v3/sensors/{sensor_id}/measurements
+```
