@@ -10,7 +10,7 @@ Tietokannan fyysinen malli on tiedostossa `schema.sql`.
 
 Kaavio mallista:
 
-![ER-kaavio](er-kaavio.png)
+![MySQL Workbench kaavio](mysql-workbench-kaavio.png)
 
 Taulut ovat:
 
